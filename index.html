@@ -232,53 +232,20 @@
 
         .hero-image {
             position: relative;
-            aspect-ratio: 16 / 10;
             border-radius: 24px;
             overflow: hidden;
             box-shadow: var(--shadow-soft);
             border: 1px solid rgba(36, 122, 61, 0.12);
-            background: #e8f4e3;
         }
 
-        .carousel-slide {
-            position: absolute;
-            inset: 0;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.9s ease;
-        }
-
-        .carousel-slide.is-active {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .carousel-slide img {
+        .hero-image img {
             width: 100%;
             height: 100%;
+            max-height: 360px;
             object-fit: cover;
             display: block;
-            transform: scale(1.06);
-            transition: transform 5s ease-out;
-        }
-
-        .carousel-slide.is-active img {
-            transform: scale(1);
-        }
-
-        .carousel-label {
-            position: absolute;
-            top: 16px;
-            left: 16px;
-            z-index: 3;
-            padding: 7px 13px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.9);
-            color: #245b34;
-            font-size: 0.78rem;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-            box-shadow: 0 8px 22px rgba(35, 83, 45, 0.15);
+            transform: scale(1.02);
+            transition: transform 0.8s ease;
         }
 
         .hero-image::after {
@@ -287,42 +254,10 @@
             inset: 0;
             background: linear-gradient(to bottom, rgba(255,255,255,0) 55%, rgba(22, 100, 53, 0.18) 100%);
             pointer-events: none;
-            z-index: 2;
         }
 
-        .carousel-controls {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            z-index: 4;
-            display: flex;
-            gap: 7px;
-            padding: 7px 9px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.88);
-            box-shadow: 0 8px 22px rgba(35, 83, 45, 0.14);
-        }
-
-        .carousel-dot {
-            width: 8px;
-            height: 8px;
-            padding: 0;
-            border: 0;
-            border-radius: 50%;
-            background: #b7c9b7;
-            cursor: pointer;
-            transition: width 0.3s ease, border-radius 0.3s ease, background 0.3s ease;
-        }
-
-        .carousel-dot.is-active {
-            width: 23px;
-            border-radius: 999px;
-            background: var(--primary-color);
-        }
-
-        .carousel-dot:focus-visible {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 3px;
+        .hero-image:hover img {
+            transform: scale(1.06);
         }
 
         .hero-badge {
@@ -429,12 +364,6 @@
         }
 
         @media (prefers-reduced-motion: reduce) {
-            .carousel-slide,
-            .carousel-slide img,
-            .carousel-dot {
-                transition: none;
-            }
-
             .reveal-ready .hero-text h2,
             .reveal-ready .hero-subtitle,
             .reveal-ready .hero-tags,
@@ -470,10 +399,21 @@
             transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
         }
 
+        a.module-card {
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
         .module-card:hover {
             transform: translateY(-6px) scale(1.01);
             box-shadow: 0 22px 48px rgba(35, 83, 45, 0.18);
             border-color: rgba(36, 122, 61, 0.42);
+        }
+
+        .module-card:focus-visible {
+            outline: 3px solid rgba(105, 185, 54, 0.45);
+            outline-offset: 5px;
         }
 
         .module-card img {
@@ -591,6 +531,7 @@
                     <span class="tag-pill">Education &amp; Entertainment (Edutainment)</span>
                     <span class="tag-pill">Interactive labs</span>
                     <span class="tag-pill">Healthcare &amp; Technology</span>
+                    <span class="tag-pill">Healthcare &amp; Technology</span>
                 </div>
 
                 <div class="hero-cta">
@@ -610,39 +551,16 @@
             </div>
 
             <div class="hero-image-wrapper">
-                <div class="hero-image hero-carousel" aria-label="Healthcare, education, nutrition and knowledge highlights">
-                    <div class="carousel-slide is-active" aria-hidden="false">
-                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&amp;fit=crop&amp;w=1200&amp;q=85"
-                             alt="Healthcare professional using modern medical technology">
-                        <span class="carousel-label">Healthcare</span>
-                    </div>
-                    <div class="carousel-slide" aria-hidden="true">
-                        <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&amp;fit=crop&amp;w=1200&amp;q=85"
-                             alt="Students learning together in an educational setting">
-                        <span class="carousel-label">Education</span>
-                    </div>
-                    <div class="carousel-slide" aria-hidden="true">
-                        <img src="https://images.unsplash.com/photo-1490645935967-10de6ba17061?auto=format&amp;fit=crop&amp;w=1200&amp;q=85"
-                             alt="A balanced selection of fresh and nutritious foods">
-                        <span class="carousel-label">Nutrition</span>
-                    </div>
-                    <div class="carousel-slide" aria-hidden="true">
-                        <img src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?auto=format&amp;fit=crop&amp;w=1200&amp;q=85"
-                             alt="Library shelves filled with books representing knowledge">
-                        <span class="carousel-label">Knowledge</span>
-                    </div>
-                    <div class="carousel-controls" aria-label="Choose a featured topic">
-                        <button class="carousel-dot is-active" type="button" aria-label="Show healthcare image" aria-pressed="true"></button>
-                        <button class="carousel-dot" type="button" aria-label="Show education image" aria-pressed="false"></button>
-                        <button class="carousel-dot" type="button" aria-label="Show nutrition image" aria-pressed="false"></button>
-                        <button class="carousel-dot" type="button" aria-label="Show knowledge image" aria-pressed="false"></button>
-                    </div>
+                <div class="hero-image">
+                    <!-- NEW: serum / clinical chemistry analyzers image -->
+                    <img src="https://doctorialsacademy.com/wp-content/uploads/2024/02/biochemistry-definition-1.png"
+                         alt="Automated wet chemistry analyzer and clinical chemistry workflow">
                 </div>
                 <div class="hero-badge">
                     <div class="hero-badge-pill"></div>
                     <div class="hero-badge-text">
-                        <strong>Life. Learning. Wellbeing. Discovery.</strong><br>
-                        Ideas and resources for healthier, more informed living.
+                        <strong>Precision. Reproducibility. Reliability.</strong><br>
+                        A dedicated space for modern clinical biochemistry practice.
                     </div>
                 </div>
             </div>
@@ -702,7 +620,7 @@
             <div class="modules-grid">
 
                 <!-- Education -->
-                <article class="module-card">
+                <a class="module-card" href="education.html" aria-label="Open Education video library with YouTube previews">
                     <!-- Stock image: classroom / learning -->
                     <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=900&q=80"
                          alt="Students and professionals learning together">
@@ -715,7 +633,7 @@
                         </p>
                         <span class="card-pill">Courses · Webinars · Micro-modules</span>
                     </div>
-                </article>
+                </a>
 
                 <!-- EQAS -->
                 <article class="module-card">
@@ -783,54 +701,6 @@
         );
         const aboutItems = document.querySelectorAll('#about .section-header, #about p');
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        const carousel = document.querySelector('.hero-carousel');
-        const slides = carousel ? [...carousel.querySelectorAll('.carousel-slide')] : [];
-        const carouselDots = carousel ? [...carousel.querySelectorAll('.carousel-dot')] : [];
-        let activeSlide = 0;
-        let carouselTimer;
-
-        const showSlide = (index) => {
-            activeSlide = (index + slides.length) % slides.length;
-
-            slides.forEach((slide, slideIndex) => {
-                const isActive = slideIndex === activeSlide;
-                slide.classList.toggle('is-active', isActive);
-                slide.setAttribute('aria-hidden', String(!isActive));
-            });
-
-            carouselDots.forEach((dot, dotIndex) => {
-                const isActive = dotIndex === activeSlide;
-                dot.classList.toggle('is-active', isActive);
-                dot.setAttribute('aria-pressed', String(isActive));
-            });
-        };
-
-        const stopCarousel = () => window.clearInterval(carouselTimer);
-        const startCarousel = () => {
-            stopCarousel();
-            if (!reduceMotion && slides.length > 1) {
-                carouselTimer = window.setInterval(() => showSlide(activeSlide + 1), 4200);
-            }
-        };
-
-        carouselDots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                showSlide(index);
-                startCarousel();
-            });
-        });
-
-        if (carousel) {
-            carousel.addEventListener('mouseenter', stopCarousel);
-            carousel.addEventListener('mouseleave', startCarousel);
-            carousel.addEventListener('focusin', stopCarousel);
-            carousel.addEventListener('focusout', startCarousel);
-            document.addEventListener('visibilitychange', () => {
-                document.hidden ? stopCarousel() : startCarousel();
-            });
-            startCarousel();
-        }
 
         if (!reduceMotion && 'IntersectionObserver' in window) {
             document.documentElement.classList.add('reveal-ready');
